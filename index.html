@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="톰(45년 경험)과 함께 미국 전역을 오토바이로 타보세요. 한국 라이더를 위한 소규모 그룹 투어. 안전하고 신뢰할 수 있는 가이드. KakaoTalk으로 문의하세요.">
+  <title>톰의 투어 USA | 미국 오토바이 투어 가이드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --kakao: #FEE500; --kakao-text: #3C1E1E; --kakao-hover: #F5D800;
+      --blue: #1B5E9E; --blue-dark: #0D3A5C; --blue-darker: #0A2440;
+      --gold: #D4763C; --gold-dark: #B5582A;
+      --green: #2C5F2D;
+      --text: #2C2C2C; --text-2: #555; --text-light: #A89A8F;
+      --bg: #FFFFFF; --bg-warm: #F5F0EB; --bg-section: #FAF8F6;
+      --radius: 8px;
+      --shadow: 0 2px 8px rgba(44,44,44,0.08);
+      --shadow-hover: 0 8px 24px rgba(44,44,44,0.12);
+      --font: "Noto Sans KR", "Inter", -apple-system, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    /* Base font: 16px minimum for senior readability */
+    body { font-family: var(--font); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .skip { position: absolute; top: -100%; left: 16px; background: var(--blue); color: #fff; padding: 8px 16px; border-radius: var(--radius); z-index: 1000; font-size: 16px; }
+    .skip:focus { top: 8px; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── BUTTONS — 3-tier CTA hierarchy ── */
+    .btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font); font-weight: 600; border: none; cursor: pointer; border-radius: var(--radius); transition: all 0.2s; gap: 8px; }
+    .btn-kakao { background: var(--kakao); color: var(--kakao-text); padding: 16px 36px; font-size: 18px; min-height: 56px; box-shadow: 0 2px 12px rgba(254,229,0,0.3); font-weight: 700; }
+    .btn-kakao:hover { background: var(--kakao-hover); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(254,229,0,0.4); }
+    .btn-primary { background: var(--blue); color: #fff; padding: 14px 28px; font-size: 17px; min-height: 52px; box-shadow: 0 2px 8px rgba(27,94,158,0.2); }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--blue); padding: 12px 24px; font-size: 16px; min-height: 48px; border: 2px solid var(--blue); }
+    .btn-outline:hover { background: var(--blue); color: #fff; }
+
+    /* ── HEADER — larger nav fonts for seniors ── */
+    .header { position: sticky; top: 0; background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid #eee; z-index: 100; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-shield { width: 40px; height: 40px; background: var(--blue-darker); border-radius: 4px 4px 12px 12px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .logo-shield::before { content: ''; position: absolute; inset: 3px; border: 2px solid rgba(255,255,255,0.3); border-radius: 2px 2px 10px 10px; }
+    .logo-shield span { color: #fff; font-size: 14px; font-weight: 900; letter-spacing: -0.05em; line-height: 1; }
+    .logo-text { font-size: 22px; font-weight: 700; color: var(--blue-darker); letter-spacing: -0.02em; line-height: 1.1; }
+    .logo-text em { font-style: normal; color: var(--gold); font-weight: 900; }
+    .nav { display: flex; gap: 24px; align-items: center; }
+    .nav a { font-size: 17px; font-weight: 600; color: var(--text-2); transition: color 0.15s; }
+    .nav a:hover { color: var(--blue); }
+    .btn-header { padding: 10px 24px; font-size: 16px; min-height: 44px; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); margin: 6px 0; transition: 0.3s; border-radius: 2px; }
+    .nav-mobile { display: none; }
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .btn-header { display: none; }
+      .hamburger { display: block; }
+      .nav-mobile.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-bottom: 1px solid #eee; padding: 16px 24px; gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+      .nav-mobile a { font-size: 18px; font-weight: 600; color: var(--text); padding: 10px 0; }
+    }
+
+    /* ── HERO ── */
+    .hero { padding: 0; position: relative; min-height: 85vh; display: flex; align-items: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,36,64,0.88) 0%, rgba(10,36,64,0.55) 45%, rgba(10,36,64,0.15) 100%); }
+    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: center; padding: 80px 0; }
+    .hero h1 { font-size: 42px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: #fff; margin-bottom: 16px; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    .hero-sub { font-size: 18px; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 28px; }
+    .hero-cta { display: flex; flex-direction: column; gap: 12px; }
+    .hero-note { font-size: 16px; color: rgba(255,255,255,0.6); }
+    .hero-media { border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.4); aspect-ratio: 16/9; background: #000; }
+    .hero-media iframe { width: 100%; height: 100%; border: none; }
+    @media (max-width: 768px) {
+      .hero { min-height: auto; }
+      .hero-bg::after { background: rgba(10,36,64,0.78); }
+      .hero-inner { grid-template-columns: 1fr; gap: 24px; padding: 60px 0; }
+      .hero h1 { font-size: 28px; }
+    }
+
+    /* ── ABOUT ── */
+    .about { padding: 80px 0; background: var(--bg); }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .about h2 { font-size: 32px; letter-spacing: -0.02em; margin-bottom: 20px; }
+    .about p { font-size: 17px; color: var(--text-2); line-height: 1.8; margin-bottom: 16px; }
+    .about-photo { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-hover); }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .stat-item { text-align: center; padding: 20px; background: var(--bg-warm); border-radius: var(--radius); }
+    .stat-number { font-size: 36px; font-weight: 700; color: var(--blue); line-height: 1; display: block; margin-bottom: 4px; }
+    .stat-label { font-size: 16px; color: var(--text-light); font-weight: 500; }
+    .testimonial { border-left: 4px solid var(--green); padding: 16px 20px; margin-top: 20px; background: var(--bg-warm); border-radius: 0 var(--radius) var(--radius) 0; }
+    .testimonial q { font-size: 17px; font-style: italic; color: var(--text); line-height: 1.7; display: block; margin-bottom: 8px; }
+    .testimonial cite { font-size: 16px; color: var(--text-light); font-style: normal; font-weight: 600; }
+    @media (max-width: 768px) {
+      .about-inner { grid-template-columns: 1fr; }
+      .about h2 { font-size: 28px; }
+    }
+
+    /* ── TOURS ── */
+    .tours { padding: 80px 0; background: var(--bg-section); }
+    .tours h2 { font-size: 32px; text-align: center; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .section-intro { font-size: 17px; color: var(--text-2); text-align: center; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .tour-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-bottom: 40px; }
+    .tour-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: box-shadow 0.2s, transform 0.2s; }
+    .tour-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .tour-card-img { height: 220px; overflow: hidden; position: relative; }
+    .tour-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .tour-card:hover .tour-card-img img { transform: scale(1.05); }
+    .tour-badge { position: absolute; top: 12px; left: 12px; background: rgba(10,36,64,0.85); color: #fff; font-size: 16px; font-weight: 700; padding: 6px 14px; border-radius: 20px; }
+    .tour-card-body { padding: 20px 24px; }
+    .tour-card h3 { font-size: 20px; margin-bottom: 6px; color: var(--text); }
+    .tour-desc { font-size: 16px; color: var(--text-2); line-height: 1.7; margin-bottom: 12px; }
+    .tour-stats { display: flex; gap: 16px; font-size: 16px; color: var(--text-2); flex-wrap: wrap; }
+    .tour-stats strong { font-weight: 700; color: var(--blue); }
+    .tours-kicker { text-align: center; background: linear-gradient(135deg, var(--blue-darker) 0%, var(--blue) 100%); color: #fff; padding: 40px 32px; border-radius: 12px; }
+    .tours-kicker p { font-size: 18px; line-height: 1.7; margin-bottom: 20px; opacity: 0.9; }
+    .tours-kicker .kicker-headline { font-size: 24px; font-weight: 700; margin-bottom: 12px; opacity: 1; }
+    .tours-kicker .btn-kakao { font-size: 18px; }
+
+    /* ── GALLERY — single main photo with peek of next ── */
+    .gallery { padding: 80px 0; background: var(--bg); }
+    .gallery h2 { font-size: 32px; text-align: center; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .carousel-wrapper { position: relative; margin-top: 32px; overflow: hidden; }
+    .carousel-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 4px 0; }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-slide { flex: 0 0 calc(100% - 80px); scroll-snap-align: center; border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; position: relative; cursor: pointer; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .carousel-slide:hover img { transform: scale(1.02); }
+    .carousel-slide figcaption { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 20px; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: #fff; font-size: 17px; font-weight: 600; }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.9); border: none; cursor: pointer; font-size: 22px; color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 2; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .carousel-btn:hover { background: #fff; }
+    .carousel-btn.prev { left: 16px; }
+    .carousel-btn.next { right: 16px; }
+    @media (max-width: 768px) { .carousel-slide { flex: 0 0 calc(100% - 40px); } }
+
+    /* ── LIGHTBOX ── */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 85vw; max-height: 85vh; border-radius: 8px; user-select: none; }
+    .lightbox-close { position: absolute; top: 20px; right: 24px; color: #fff; font-size: 36px; cursor: pointer; background: none; border: none; z-index: 2; }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,0.15); border: none; cursor: pointer; font-size: 24px; color: #fff; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+    .lightbox-nav.prev { left: 20px; }
+    .lightbox-nav.next { right: 20px; }
+    .lightbox-counter { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 16px; font-weight: 500; }
+
+    /* ── VIDEOS — full-width secondary thumbnails ── */
+    .videos { padding: 80px 0; background: var(--bg-section); }
+    .videos h2 { font-size: 32px; text-align: center; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .video-player { max-width: 800px; margin: 0 auto; }
+    .video-featured { border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #111; margin-bottom: 16px; }
+    .video-featured iframe { width: 100%; height: 100%; border: none; }
+    .video-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .video-thumb { border-radius: var(--radius); overflow: hidden; cursor: pointer; border: 3px solid transparent; transition: border-color 0.2s, opacity 0.2s; opacity: 0.65; position: relative; }
+    .video-thumb.active { border-color: var(--blue); opacity: 1; }
+    .video-thumb:hover { opacity: 1; }
+    .video-thumb img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .video-thumb-label { font-size: 16px; color: var(--text-2); text-align: center; padding: 8px 4px; font-weight: 500; }
+    .video-thumb .play-icon { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .video-thumb .play-icon::after { content: ''; border-left: 12px solid #fff; border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px; }
+
+    /* ── CONTACT — with icons ── */
+    .contact { padding: 80px 0; background: var(--bg-warm); }
+    .contact h2 { font-size: 32px; text-align: center; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .contact-intro { font-size: 17px; color: var(--text-2); text-align: center; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .contact-kakao { background: var(--kakao); border-radius: 12px; padding: 40px; text-align: center; max-width: 600px; margin: 0 auto 28px; box-shadow: 0 4px 16px rgba(254,229,0,0.25); }
+    .contact-icon { font-size: 40px; margin-bottom: 12px; display: block; }
+    .contact-kakao h3 { font-size: 24px; font-weight: 700; color: var(--kakao-text); margin-bottom: 8px; }
+    .contact-kakao p { font-size: 17px; color: var(--kakao-text); margin-bottom: 8px; opacity: 0.8; }
+    .contact-kakao .kakao-id { font-size: 28px; font-weight: 900; color: var(--kakao-text); margin-bottom: 20px; letter-spacing: 0.01em; }
+    .btn-kakao-dark { background: var(--kakao-text); color: var(--kakao); padding: 14px 36px; font-size: 18px; min-height: 52px; font-weight: 700; border-radius: var(--radius); }
+    .btn-kakao-dark:hover { background: #2a1414; transform: translateY(-1px); }
+    .contact-secondary { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; margin: 0 auto 32px; }
+    .contact-alt { background: var(--bg); border-radius: var(--radius); padding: 24px; text-align: center; box-shadow: var(--shadow); }
+    .contact-alt .contact-icon { font-size: 32px; margin-bottom: 8px; }
+    .contact-alt h3 { font-size: 18px; margin-bottom: 4px; color: var(--text); }
+    .contact-alt .contact-detail { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+    .contact-note { text-align: center; font-size: 16px; color: var(--text-light); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    @media (max-width: 768px) { .contact-secondary { grid-template-columns: 1fr; } }
+
+    /* ── FOOTER ── */
+    .footer { padding: 28px 0; background: var(--text); color: #aaa; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer p { font-size: 16px; }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a { font-size: 16px; color: #aaa; transition: color 0.15s; }
+    .footer-nav a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip">메인 콘텐츠로 이동</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <div class="logo-shield"><span>TT</span></div>
+        <div class="logo-text">Tom's Tours<br><em>USA</em></div>
+      </a>
+      <nav class="nav">
+        <a href="#home">홈</a>
+        <a href="#about">소개</a>
+        <a href="#tours">투어</a>
+        <a href="#gallery">갤러리</a>
+        <a href="#videos">영상</a>
+        <a href="#contact">연락처</a>
+      </nav>
+      <a href="#contact" class="btn btn-kakao btn-header">카톡 문의</a>
+      <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-mobile" aria-label="모바일 내비게이션">
+        <a href="#home">홈</a>
+        <a href="#about">소개</a>
+        <a href="#tours">투어</a>
+        <a href="#gallery">갤러리</a>
+        <a href="#videos">영상</a>
+        <a href="#contact">연락처</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="hero-bg">
+        <img src="images/tom_photo_26_464926264_8675772012460981_7586616821301831570_n.jpg" alt="미국 서부 사막 도로를 달리는 할리데이비슨 라이더들" width="1200" height="800">
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <h1>미국의 진짜 도로를,<br>진짜 라이더와 함께.</h1>
+          <p class="hero-sub">미국 거주 45년. 50개 주 전역 주행 경험.<br>한국 라이더를 위한 소규모 맞춤 오토바이 투어.</p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-kakao">KakaoTalk으로 문의하기</a>
+            <p class="hero-note">그룹 규모, 일정, 경로에 따라 가격이 달라집니다.</p>
+          </div>
+        </div>
+        <div class="hero-media">
+          <iframe src="https://www.youtube.com/embed/WJur4CmIPFg" title="Tom's Tours USA 대표 투어 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+      <div class="container about-inner">
+        <div class="about-left">
+          <h2>톰 소개</h2>
+          <p>미국에서 45년을 거주하면서 미국 50개 주와 세계 각지를 여행하고, 청년시절부터 모터사이클을 즐기며 살아온 이 토마스는 미 동부 할리 클럽과 뉴욕 한인 할리 모터사이클 클럽 회장을 8년간 역임하면서 미국과 캐나다를 모터사이클로 여러 번 대륙 횡단하였습니다.</p>
+          <p>그 경험이 한국에 알려져 여러 차례 한국에서 온 수십 명의 할리 라이더들을 가이드해서 미 서부 지역(2022년 10월 3,000km)과 미 동부(2025년 10월 2,500km), 캐나다 북동부 지역 라이딩 가이드를(2019년 9월 2,800km) 진행한 바 있습니다.</p>
+          <p>미국, 캐나다 전역을 꿰뚫고 있는 여행과 그룹 투어의 경험을 가지고, 넓은 대륙에서 한번 달려보고 싶어하는 한국 라이더들을 위해 미국과 캐나다 바이크 라이딩 전문 여행사를 하고 있습니다.</p>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <strong class="stat-number">45+</strong>
+              <span class="stat-label">미국 거주 연수</span>
+            </div>
+            <div class="stat-item">
+              <strong class="stat-number">50</strong>
+              <span class="stat-label">주행한 주</span>
+            </div>
+            <div class="stat-item">
+              <strong class="stat-number">8년</strong>
+              <span class="stat-label">할리 클럽 회장</span>
+            </div>
+            <div class="stat-item">
+              <strong class="stat-number">수십 명</strong>
+              <span class="stat-label">안내한 한국 라이더</span>
+            </div>
+          </div>
+          <div class="testimonial">
+            <q>처음 미국에서 오토바이를 탔는데, 톰 덕분에 안전하고 즐거웠습니다. 혼자서는 절대 찾지 못했을 루트를 달렸어요.</q>
+            <cite>— 한국 라이더</cite>
+          </div>
+        </div>
+        <div class="about-right">
+          <div class="about-photo" style="margin-bottom: 20px;">
+            <img src="images/tom_photo_05_464810872_8675771472461035_6120434670242556151_n.jpg" alt="톰과 부인이 할리데이비슨 앞에서 태극기 패치를 달고 서 있는 모습, 배경에 눈 덮인 산맥" width="800" height="600">
+          </div>
+          <div class="about-photo">
+            <img src="images/tom_photo_21_465049467_8675771992460983_22956822649768650_n.jpg" alt="한국 라이더 그룹이 미국 서부 사막 도로를 함께 달리는 모습" width="1200" height="800" style="object-position: center 40%;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tours -->
+    <section id="tours" class="tours">
+      <div class="container">
+        <h2>대표 라이딩 코스 안내</h2>
+        <p class="section-intro">톰이 직접 가이드한 투어 실적과 운영 가능한 라이딩 코스입니다.</p>
+        <div class="tour-grid">
+
+          <article class="tour-card">
+            <div class="tour-card-img">
+              <img src="images/tom_photo_00_84944346_139791877510126_1962353175809753088_n.jpg" alt="뉴욕 시내에서 태극기와 성조기를 꽂고 퍼레이드하는 할리데이비슨 라이더들" width="800" height="533">
+              <span class="tour-badge">실적 · 2025</span>
+            </div>
+            <div class="tour-card-body">
+              <h3>동부 해안 투어</h3>
+              <p class="tour-desc">뉴욕과 워싱턴, 나이아가라 폭포 관광겸 라이딩. 미국 동부의 핵심 도시와 명소를 연결하는 클래식 루트.</p>
+              <div class="tour-stats">
+                <span><strong>2,400</strong> 마일</span>
+                <span><strong>3,840</strong> km</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tour-card">
+            <div class="tour-card-img">
+              <img src="images/tom_photo_08_488828377_9582193795152127_687801019452766857_n.jpg" alt="그랜드 캐니언에서 프리로드 클럽 & 브라더스 클럽 현수막을 들고 단체 사진" width="800" height="600">
+              <span class="tour-badge">실적 · 2022</span>
+            </div>
+            <div class="tour-card-body">
+              <h3>서부 국립공원 투어</h3>
+              <p class="tour-desc">라스베가스와 그랜드캐니언을 포함한 미국 5대 국립공원 관광과 라이딩.</p>
+              <div class="tour-stats">
+                <span><strong>2,500</strong> 마일</span>
+                <span><strong>4,000</strong> km</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tour-card">
+            <div class="tour-card-img">
+              <img src="images/tom_photo_27_488885976_9582193855152121_6906974267785464654_n.jpg" alt="유타 캐니언 도로를 달리는 오토바이 그룹" width="800" height="1067">
+              <span class="tour-badge">코스 운영</span>
+            </div>
+            <div class="tour-card-body">
+              <h3>대륙 횡단 (편도)</h3>
+              <p class="tour-desc">동부 뉴욕(워싱턴 D.C)에서 서부까지 대륙 횡단. 시애틀, 샌프란시스코, L.A., 캐나다 밴쿠버.</p>
+              <div class="tour-stats">
+                <span><strong>3,000</strong> 마일</span>
+                <span><strong>4,800</strong> km</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tour-card">
+            <div class="tour-card-img">
+              <img src="images/tom_photo_15_84994935_139787230843924_2772273240628789248_n.jpg" alt="Death Valley 도로를 달리는 3대의 할리데이비슨" width="800" height="533">
+              <span class="tour-badge">코스 운영</span>
+            </div>
+            <div class="tour-card-body">
+              <h3>전국 일주 · Route 66</h3>
+              <p class="tour-desc">미국 전국 일주(6,400마일), Route 66 완주(2,200마일), 버킷리스트 코스 등.</p>
+              <div class="tour-stats">
+                <span><strong>2,200~6,400</strong> 마일</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tour-card">
+            <div class="tour-card-img">
+              <img src="images/tom_photo_25_465243068_8675771479127701_7243682303190570043_n.jpg" alt="호수와 산맥이 보이는 미국 서부 도로를 달리는 할리데이비슨 라이더들" width="800" height="533">
+              <span class="tour-badge">코스 운영</span>
+            </div>
+            <div class="tour-card-body">
+              <h3>버킷리스트 & 3대 랠리</h3>
+              <p class="tour-desc">뷰티풀·익사이팅·고난도 라이딩 Top10, Daytona · Sturgis · Laconia 미국 3대 바이크 랠리.</p>
+              <div class="tour-stats">
+                <span>코스별 상이</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="tours-kicker">
+          <p class="kicker-headline">당신만의 코스를 만들어 드립니다</p>
+          <p>모든 라이딩 코스에 대한 자세한 안내는 카톡으로 설명해 드립니다.<br>아울러 북미 어디든지 가족이나 친구들과 함께하는 소그룹 여행도 도와 드리고 있습니다.</p>
+          <a href="#contact" class="btn btn-kakao">카카오톡으로 상담하기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+        <h2>투어 현장</h2>
+        <p class="section-intro">톰의 실제 투어에서 촬영된 사진들입니다.</p>
+        <div class="carousel-wrapper">
+          <button class="carousel-btn prev" aria-label="이전 사진" onclick="scrollCarousel(-1)">&#8249;</button>
+          <div class="carousel-track" id="carousel">
+            <figure class="carousel-slide" onclick="openLightbox(0)">
+              <img src="images/tom_photo_06_488886366_9582193965152110_1813676791283124795_n.jpg" alt="델리케이트 아치(Arches 국립공원) 앞에서 한국 라이더 단체 사진" width="800" height="600" loading="lazy">
+              <figcaption>Arches 국립공원</figcaption>
+            </figure>
+            <figure class="carousel-slide" onclick="openLightbox(1)">
+              <img src="images/tom_photo_08_488828377_9582193795152127_687801019452766857_n.jpg" alt="그랜드 캐니언에서 한국 라이더 단체 사진" width="800" height="600" loading="lazy">
+              <figcaption>그랜드 캐니언</figcaption>
+            </figure>
+            <figure class="carousel-slide" onclick="openLightbox(2)">
+              <img src="images/tom_photo_03_83184642_139791944176786_7945144049638309888_n.jpg" alt="뉴욕 맨해튼 거리에서 할리데이비슨 퍼레이드" width="800" height="600" loading="lazy">
+              <figcaption>뉴욕 맨해튼 퍼레이드</figcaption>
+            </figure>
+            <figure class="carousel-slide" onclick="openLightbox(3)">
+              <img src="images/tom_photo_25_465243068_8675771479127701_7243682303190570043_n.jpg" alt="호수와 산맥이 보이는 서부 도로 라이딩" width="800" height="533" loading="lazy">
+              <figcaption>서부 호수 도로</figcaption>
+            </figure>
+            <figure class="carousel-slide" onclick="openLightbox(4)">
+              <img src="images/tom_photo_26_464926264_8675772012460981_7586616821301831570_n.jpg" alt="Death Valley 사막 도로를 달리는 할리데이비슨 라이더들" width="800" height="533" loading="lazy">
+              <figcaption>Death Valley</figcaption>
+            </figure>
+            <figure class="carousel-slide" onclick="openLightbox(5)">
+              <img src="images/tom_photo_27_488885976_9582193855152121_6906974267785464654_n.jpg" alt="유타 캐니언 도로를 달리는 오토바이 그룹" width="800" height="1067" loading="lazy">
+              <figcaption>유타 캐니언 도로</figcaption>
+            </figure>
+            <figure class="carousel-slide" onclick="openLightbox(6)">
+              <img src="images/tom_photo_16_489567355_9582194078485432_1853316610992331091_n.jpg" alt="할리데이비슨 딜러십에서 한국 투어 그룹 단체 사진" width="800" height="600" loading="lazy">
+              <figcaption>할리데이비슨 딜러십</figcaption>
+            </figure>
+            <figure class="carousel-slide" onclick="openLightbox(7)">
+              <img src="images/tom_photo_10_85175616_139786007510713_4431457903513174016_n.jpg" alt="통나무집 앞에서 한국인 할리 클럽 단체 사진" width="800" height="533" loading="lazy">
+              <figcaption>뉴잉글랜드 투어</figcaption>
+            </figure>
+            <figure class="carousel-slide" onclick="openLightbox(8)">
+              <img src="images/tom_photo_21_465049467_8675771992460983_22956822649768650_n.jpg" alt="광활한 미국 서부 사막 직선 도로를 달리는 라이더들" width="1200" height="800" loading="lazy">
+              <figcaption>서부 사막 직선 도로</figcaption>
+            </figure>
+          </div>
+          <button class="carousel-btn next" aria-label="다음 사진" onclick="scrollCarousel(1)">&#8250;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos -->
+    <section id="videos" class="videos">
+      <div class="container">
+        <h2>라이더들의 경험</h2>
+        <p class="section-intro">톰과 라이더들이 직접 촬영한 투어 영상을 확인하세요.</p>
+        <div class="video-player">
+          <div class="video-featured" id="video-main">
+            <iframe id="video-iframe" src="https://www.youtube.com/embed/WJur4CmIPFg" title="Tom's Tours USA 투어 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-picker">
+            <div class="video-thumb active" onclick="switchVideo('WJur4CmIPFg', this)" data-id="WJur4CmIPFg">
+              <div class="play-icon"></div>
+              <img src="https://img.youtube.com/vi/WJur4CmIPFg/mqdefault.jpg" alt="투어 영상 1 썸네일" width="320" height="180">
+              <div class="video-thumb-label">대표 투어 영상</div>
+            </div>
+            <div class="video-thumb" onclick="switchVideo('ooFlT85MBmo', this)" data-id="ooFlT85MBmo">
+              <div class="play-icon"></div>
+              <img src="https://img.youtube.com/vi/ooFlT85MBmo/mqdefault.jpg" alt="투어 영상 2 썸네일" width="320" height="180">
+              <div class="video-thumb-label">투어 영상 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>톰에게 연락하기</h2>
+        <p class="contact-intro">카톡 전화나 이메일로 참가 인원과 시기, 여행 기간에 따른 바이크 라이딩과 여행 문의에 대해 비용과 안내해 드립니다.</p>
+
+        <div class="contact-kakao">
+          <span class="contact-icon" role="img" aria-label="카카오톡">💬</span>
+          <h3>카카오톡으로 문의하세요</h3>
+          <p>톰에게 직접 메시지를 보내세요 — 가장 빠릅니다.</p>
+          <p class="kakao-id">Tomstourusa</p>
+          <a href="https://open.kakao.com/o/tomstourusa" class="btn btn-kakao-dark" target="_blank" rel="noopener">카카오톡 대화 시작하기</a>
+        </div>
+
+        <div class="contact-secondary">
+          <div class="contact-alt">
+            <span class="contact-icon" role="img" aria-label="전화">📞</span>
+            <h3>전화</h3>
+            <p class="contact-detail">212-518-8772<br>516-462-5817</p>
+            <a href="tel:+12125188772" class="btn btn-outline">전화하기</a>
+          </div>
+          <div class="contact-alt">
+            <span class="contact-icon" role="img" aria-label="이메일">✉️</span>
+            <h3>이메일</h3>
+            <p class="contact-detail">tomstoursusa@gmail.com</p>
+            <a href="mailto:tomstoursusa@gmail.com" class="btn btn-outline">이메일 보내기</a>
+          </div>
+        </div>
+
+        <div class="contact-note">
+          <p>Toms World Inc. | 111 Lockwood Ave. New Rochelle, New York, U.S.A<br>www.tomstoursusa.com</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Tom's Tours USA (Toms World Inc.). All rights reserved.</p>
+      <nav class="footer-nav">
+        <a href="#home">홈</a>
+        <a href="#about">소개</a>
+        <a href="#tours">투어</a>
+        <a href="#gallery">갤러리</a>
+        <a href="#videos">영상</a>
+        <a href="#contact">연락처</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="닫기" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav prev" aria-label="이전" onclick="navLightbox(-1); event.stopPropagation();">&#8249;</button>
+    <img src="" alt="" id="lightbox-img" onclick="event.stopPropagation();">
+    <button class="lightbox-nav next" aria-label="다음" onclick="navLightbox(1); event.stopPropagation();">&#8250;</button>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+
+  <script>
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const navMobile = document.querySelector('.nav-mobile');
+    hamburger.addEventListener('click', function() {
+      const open = navMobile.classList.toggle('open');
+      this.setAttribute('aria-expanded', open);
+    });
+    document.querySelectorAll('.nav-mobile a').forEach(a => {
+      a.addEventListener('click', () => {
+        navMobile.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('header')) {
+        navMobile.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Gallery carousel
+    function scrollCarousel(dir) {
+      const track = document.getElementById('carousel');
+      const slideW = track.querySelector('.carousel-slide').offsetWidth + 20;
+      track.scrollBy({ left: dir * slideW, behavior: 'smooth' });
+    }
+
+    // Lightbox (infinite loop)
+    const galleryImages = [];
+    let currentLightboxIndex = 0;
+    document.querySelectorAll('.carousel-slide').forEach((slide) => {
+      const img = slide.querySelector('img');
+      galleryImages.push({ src: img.src, alt: img.alt });
+    });
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      showLightboxImage();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function navLightbox(dir) {
+      currentLightboxIndex = (currentLightboxIndex + dir + galleryImages.length) % galleryImages.length;
+      showLightboxImage();
+    }
+    function showLightboxImage() {
+      const img = galleryImages[currentLightboxIndex];
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      document.getElementById('lightbox-counter').textContent =
+        (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+    }
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navLightbox(-1);
+      if (e.key === 'ArrowRight') navLightbox(1);
+    });
+
+    // Video switcher
+    function switchVideo(videoId, thumbEl) {
+      document.getElementById('video-iframe').src =
+        'https://www.youtube.com/embed/' + videoId;
+      document.querySelectorAll('.video-thumb').forEach(t => t.classList.remove('active'));
+      thumbEl.classList.add('active');
+    }
+  </script>
+</body>
+</html>
