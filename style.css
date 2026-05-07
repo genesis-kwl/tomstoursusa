@@ -227,15 +227,22 @@ h1, h2, h3, h4 {
   min-height: 100vh;
   min-height: 100dvh;
   max-height: none;
-  /* Vertically center the inner block — overrides base .hero flex-end so
-     headline + CTAs sit at viewport mid, not the cut bottom edge. */
-  align-items: center;
+  /* Anchor content to the top so it lives in the sky area of the photo
+     and doesn't overlap the riders / horizon line near mid-frame. */
+  align-items: flex-start;
 }
-/* Horizontally center every child of the full hero — eyebrow, h1, sub, CTA row. */
-.hero.hero--full .hero-inner { text-align: center; }
+/* Horizontally center every child of the full hero — eyebrow, h1, sub, CTA row.
+   padding-top pushes the block down past the sticky nav into the upper sky. */
+.hero.hero--full .hero-inner {
+  text-align: center;
+  padding-top: 14vh;
+}
 .hero.hero--full .hero-inner h1,
 .hero.hero--full .hero-inner .hero-sub { margin-left: auto; margin-right: auto; }
 .hero.hero--full .hero-cta { justify-content: center; }
+@media (max-width: 768px) {
+  .hero.hero--full .hero-inner { padding-top: 12vh; }
+}
 
 /* ============ BUTTONS ============ */
 .btn {
