@@ -215,6 +215,16 @@ h1, h2, h3, h4 {
   .hero--portrait h1 { font-size: 40px; }
 }
 
+/* FULL hero — fills the viewport. Used on home so the destination
+   image owns the first screen completely. dvh fallback handles
+   mobile browser chrome cleanly. */
+.hero--full {
+  aspect-ratio: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: none;
+}
+
 /* ============ BUTTONS ============ */
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
