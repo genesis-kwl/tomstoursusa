@@ -231,6 +231,11 @@ h1, h2, h3, h4 {
      headline + CTAs sit at viewport mid, not the cut bottom edge. */
   align-items: center;
 }
+/* Horizontally center every child of the full hero — eyebrow, h1, sub, CTA row. */
+.hero.hero--full .hero-inner { text-align: center; }
+.hero.hero--full .hero-inner h1,
+.hero.hero--full .hero-inner .hero-sub { margin-left: auto; margin-right: auto; }
+.hero.hero--full .hero-cta { justify-content: center; }
 
 /* ============ BUTTONS ============ */
 .btn {
