@@ -2,7 +2,7 @@
 
 > **Read this first when resuming the project.** This file is the single source of truth for context, intent, current state, and conventions. Update at the end of every session if anything changed.
 
-**Last updated:** 2026-05-06 (S62)
+**Last updated:** 2026-05-07 (S62)
 **Repo:** https://github.com/genesis-kwl/tomstoursusa
 **Live site:** https://genesis-kwl.github.io/tomstoursusa/
 **Local path:** `~/tomstoursusa/`
@@ -164,6 +164,20 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
    - KAKAOTALK button label / tel mismatch (Founder may want clarifier)
    - `routes/transcontinental.html` still uses deprecated `tom_photo_25_*` thumbnail
    - Tom's KakaoTalk ID typo "Tomstourusa" (verify with Tom)
+
+---
+
+## People around Tom (internal record — DO NOT publish to the site)
+
+These are people Founder has logged as connected to Tom. **Not for public exposure** unless Founder explicitly requests addition to a page. Track here so future sessions know the relationship landscape.
+
+| Person | Relationship to Tom | Contact | Notes |
+|---|---|---|---|
+| **Tom Lee (이 토마스)** | Owner / guide | tel `516-462-5817` (KakaoTalk-linked) · `212-518-8772` (Manhattan landline) · tomstoursusa@gmail.com · KakaoTalk ID `Tomstourusa` | The site's protagonist. All public CTAs route here. 70대, NY 거주 46년. |
+| **Anne Lee** | Tom's daughter | `516-603-8778` | US-based. Likely bilingual. Founder logged 2026-05-07. Not on public site. |
+| **Brian / 강석구** | UNRELATED to Tom's Tours — separate person/business | `347-844-0762` · The Clubhouse restaurant `theclubhouseny.com` (516-873-1110, 377 Denton Ave, New Hyde Park) | Founder explicitly clarified 2026-05-07: "completely apart from tomstoursusa.com." Logged here only because the info passed through this project's chat — DO NOT confuse with Tom's contacts. |
+
+If Founder later directs adding any of these to the public site, that's a separate authorization. Default = internal record only.
 
 ---
 
