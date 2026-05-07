@@ -227,6 +227,9 @@ h1, h2, h3, h4 {
   min-height: 100vh;
   min-height: 100dvh;
   max-height: none;
+  /* Vertically center the inner block — overrides base .hero flex-end so
+     headline + CTAs sit at viewport mid, not the cut bottom edge. */
+  align-items: center;
 }
 
 /* ============ BUTTONS ============ */
