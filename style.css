@@ -254,6 +254,10 @@ h1, h2, h3, h4 {
 }
 /* Redundant contrast: text-shadow under eyebrow / h1 / sub for sky variance. */
 .hero.hero--full .hero-eyebrow {
+  /* Drop the bright teal accent — it fought the photo. White + strong
+     shadow + the existing letter-spacing/uppercase carry the hierarchy. */
+  color: #ffffff;
+  opacity: 0.92;
   text-shadow: 0 1px 6px rgba(0,0,0,0.65), 0 0 1px rgba(0,0,0,0.5);
 }
 .hero.hero--full h1,
