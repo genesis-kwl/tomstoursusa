@@ -240,15 +240,16 @@ h1, h2, h3, h4 {
 .hero.hero--full .hero-inner h1,
 .hero.hero--full .hero-inner .hero-sub { margin-left: auto; margin-right: auto; }
 .hero.hero--full .hero-cta { justify-content: center; }
-/* Top-weighted scrim: content lives in the sky now, so darken the upper
-   third for AA contrast and keep the riders/horizon clean below. Subtle
-   vignette at the bottom keeps the phone chrome from competing. */
+/* Top-weighted scrim — deep midnight blue (not flat black) so the
+   darkening reads as atmospheric sky shadow, not a foreign overlay.
+   Color #0a1a35 ≈ rgb(10,26,53) keeps hue alignment with the photo's
+   sky while still meeting AA contrast for white text on top. */
 .hero.hero--full::after {
   background: linear-gradient(180deg,
-    rgba(0,0,0,0.55) 0%,
-    rgba(0,0,0,0.32) 28%,
-    rgba(0,0,0,0)    62%,
-    rgba(0,0,0,0.40) 100%
+    rgba(10,26,53,0.62) 0%,
+    rgba(10,26,53,0.36) 28%,
+    rgba(10,26,53,0)    62%,
+    rgba(10,26,53,0.42) 100%
   );
 }
 /* Redundant contrast: text-shadow under eyebrow / h1 / sub for sky variance. */
