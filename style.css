@@ -217,9 +217,13 @@ h1, h2, h3, h4 {
 
 /* FULL hero — fills the viewport. Used on home so the destination
    image owns the first screen completely. dvh fallback handles
-   mobile browser chrome cleanly. */
-.hero--full {
+   mobile browser chrome cleanly. Double-class selector beats the
+   mobile `.hero { aspect-ratio: 4/3 }` rule that lives inside
+   @media (max-width: 768px). */
+.hero.hero--full {
   aspect-ratio: auto;
+  height: 100vh;
+  height: 100dvh;
   min-height: 100vh;
   min-height: 100dvh;
   max-height: none;
