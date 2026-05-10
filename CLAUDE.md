@@ -2,7 +2,7 @@
 
 > **Read this first when resuming the project.** This file is the single source of truth for context, intent, current state, and conventions. Update at the end of every session if anything changed.
 
-**Last updated:** 2026-05-07 (S62)
+**Last updated:** 2026-05-08 (S62)
 **Repo:** https://github.com/genesis-kwl/tomstoursusa
 **Live site:** https://genesis-kwl.github.io/tomstoursusa/
 **Local path:** `~/tomstoursusa/`
@@ -101,7 +101,7 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
 
 3. **Hero full-height uses `.hero.hero--full`** (double-class specificity). The mobile `@media (max-width: 768px)` block at style.css:719 overrides single-class `.hero--full`, so the modifier MUST stay `.hero.hero--full`. Verified bug from 2026-05-06.
 
-4. **KAKAOTALK CTA = `<a href="tel:516-462-5817">`** with visible label including the number. Three pages: index.html teal-cta, about.html teal-cta, contact.html bottom CTA. Keep all three in sync (P29-style logistics).
+4. **KAKAOTALK CTA = `<a href="kakaotalk://friendsearch?id=Tomstoursusa">`** with the ID visible in the label (so desktop users / failed deep links can copy and search manually). Four pages: index.html · about.html · stories.html · contact.html (all teal-cta + contact bottom CTA). Secondary line on each surfaces the second ID (`newyorkthomaslee` ↔ 212). Keep all in sync (P29-style logistics). Tom owns TWO KakaoTalk accounts each tied to a different phone number — never collapse to one.
 
 5. **Korean-first copy.** All user-facing strings are Korean. English only in branded eyebrows (DISCOVER · MEET YOUR GUIDE · etc.) and the wordmark "TOM'S TOURS USA".
 
@@ -123,7 +123,7 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
 - **`lonely/` exists locally as old version, ignored from git.** Don't reference. Don't push.
 - **Stories.html uses a different lightbox pattern** than home. Home: `__photos` JS array auto-built + `openLightbox(N)`. Stories: simple click handler on `.masonry-item img` setting lightbox `src`. Don't unify casually.
 - **About.html has its own carousel** (`#harleyLifeTrack`, `slideHarleyLife()`, `openLightboxLife()`) — independent of home's `#slideTrack`. Three separate JS namespaces. Naming is intentional.
-- **Tom's KakaoTalk ID in contact.html:43 is "Tomstourusa"** (one less 's' than email "tomstoursusa@gmail.com"). Verify with Tom before "fixing" — it may be an intentional registration.
+- **Tom owns TWO KakaoTalk IDs** (S62 close · 2026-05-08): `Tomstoursusa` (Westchester · 516-462-5817 · primary) and `newyorkthomaslee` (Manhattan · 212-518-8772 · secondary). The earlier "Tomstourusa" typo in contact.html was a leftover error — corrected to `Tomstoursusa`. Both IDs are intentional registrations Tom uses; both are now deep-linked via `kakaotalk://friendsearch?id=...` across all CTAs.
 
 ### Workflow (per session)
 
@@ -173,7 +173,7 @@ These are people Founder has logged as connected to Tom. **Not for public exposu
 
 | Person | Relationship to Tom | Contact | Notes |
 |---|---|---|---|
-| **Tom Lee (이 토마스)** | Owner / guide | tel `516-462-5817` (KakaoTalk-linked) · `212-518-8772` (Manhattan landline) · tomstoursusa@gmail.com · KakaoTalk ID `Tomstourusa` | The site's protagonist. All public CTAs route here. 70대, NY 거주 46년. |
+| **Tom Lee (이 토마스)** | Owner / guide | **KakaoTalk:** `Tomstoursusa` ↔ 516-462-5817 (Westchester / 웨체스터) · `newyorkthomaslee` ↔ 212-518-8772 (Manhattan / 맨하탄) · email tomstoursusa@gmail.com | The site's protagonist. All public CTAs route to KakaoTalk via `kakaotalk://friendsearch?id=...` deep links — no longer `tel:`. Primary CTA = `Tomstoursusa`. 70대, NY 거주 46년. |
 | **Anne Lee** | Tom's daughter | `516-603-8778` | US-based. Likely bilingual. Founder logged 2026-05-07. Not on public site. |
 | **Brian / 강석구** | UNRELATED to Tom's Tours — separate person/business | `347-844-0762` · The Clubhouse restaurant `theclubhouseny.com` (516-873-1110, 377 Denton Ave, New Hyde Park) | Founder explicitly clarified 2026-05-07: "completely apart from tomstoursusa.com." Logged here only because the info passed through this project's chat — DO NOT confuse with Tom's contacts. |
 
