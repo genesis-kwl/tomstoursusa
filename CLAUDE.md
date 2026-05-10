@@ -2,7 +2,7 @@
 
 > **Read this first when resuming the project.** This file is the single source of truth for context, intent, current state, and conventions. Update at the end of every session if anything changed.
 
-**Last updated:** 2026-05-08 (S62)
+**Last updated:** 2026-05-09 (S62)
 **Repo:** https://github.com/genesis-kwl/tomstoursusa
 **Live site:** https://genesis-kwl.github.io/tomstoursusa/
 **Local path:** `~/tomstoursusa/`
@@ -69,7 +69,10 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
 - Single `style.css` (~1400 LOC, sectioned).
 - Inline `<script>` per page (lightbox + carousel only).
 - **External:** Google Fonts (Inter · Public Sans · Pretendard Variable). Nothing else.
-- **Hosting:** GitHub Pages from `main` branch. Auto-deploys on push (1-2 min build).
+- **Hosting:**
+  - **Primary (production · 2026-05-09→):** Tom's GoDaddy hosting at `tomstoursusa.com` (custom domain). Static files uploaded via FTP/SFTP. Auto-deploy via `.github/workflows/deploy-godaddy.yml` on every push to main (requires GitHub Secrets `FTP_HOST` · `FTP_USER` · `FTP_PASSWORD` · `FTP_REMOTE`). Manual one-shot push: `./deploy-manual.sh` (needs `brew install lftp` once).
+  - **Mirror (preview · always-on):** GitHub Pages at `https://genesis-kwl.github.io/tomstoursusa/` — auto-deploys on push to main, no extra config. Useful as fallback / preview while DNS propagates / Tom GoDaddy hosting is troubled.
+  - Both are kept in sync because both deploy from the same `main` branch.
 - **Server (local dev):** `python3 -m http.server 4501` from `~/tomstoursusa/`. Don't introduce Vite / Live Server / Node — out of scope.
 
 ### Asset organization
@@ -133,6 +136,30 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
 4. **Verify locally** via curl + browser preview before commit.
 5. **Commit small, focused.** Subject ≤72 chars, body explains why.
 6. **Push to deploy** ONLY with Founder confirmation (external visibility = needs go-ahead).
+   - Push triggers BOTH deploys: GitHub Pages (always works) AND GoDaddy (only if FTP secrets are set).
+   - Live URL: `https://tomstoursusa.com/` (Tom's domain) and `https://genesis-kwl.github.io/tomstoursusa/` (mirror).
+
+### Deployment (GoDaddy — production)
+
+Two paths:
+
+**(A) Auto-deploy via GitHub Action** (preferred, set up once)
+- Workflow file: `.github/workflows/deploy-godaddy.yml`
+- Required GitHub Secrets (Settings → Secrets → Actions): `FTP_HOST` · `FTP_USER` · `FTP_PASSWORD` · `FTP_REMOTE` (usually `/public_html/`)
+- After secrets are set, every push to main = auto FTP sync
+- View deploy logs in GitHub Actions tab
+
+**(B) Manual one-shot** (for first push or out-of-band updates)
+- Install `lftp` once: `brew install lftp`
+- Set env vars + run: `FTP_HOST=... FTP_USER=... FTP_PASSWORD=... FTP_REMOTE=/public_html/ ./deploy-manual.sh`
+- Mirrors current dir to remote, excludes git/internal docs, parallel transfer
+
+**What we need from Tom (one-time):**
+1. GoDaddy hosting **FTP host** (e.g. `ftp.tomstoursusa.com` or specific server like `ftpupload.net`)
+2. **FTP username** (typically the cPanel user)
+3. **FTP password** (or SFTP if Deluxe+ plan)
+4. **Web root path** (`/public_html/` for cPanel default)
+5. **Domain DNS state** — is `tomstoursusa.com` already pointed at the hosting? If not, set A record to GoDaddy hosting IP (or use their auto-config in cPanel).
 
 ### Routing (who handles what)
 

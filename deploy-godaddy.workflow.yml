@@ -1,0 +1,49 @@
+name: Deploy to GoDaddy
+
+# Auto-deploys this repo to Tom's GoDaddy hosting on every push to main.
+# Requires the following GitHub repository secrets (Settings → Secrets → Actions):
+#   FTP_HOST     — e.g. "ftp.tomstoursusa.com" or the GoDaddy server hostname
+#   FTP_USER     — GoDaddy hosting FTP username
+#   FTP_PASSWORD — GoDaddy hosting FTP password
+#   FTP_REMOTE   — destination dir, usually "/public_html/" (cPanel) or "/" (depending on plan)
+#
+# The action will sync the working tree to the remote, EXCLUDING:
+#   .git/, .github/, node_modules/, _archive_atlas/, lonely/, README.md, CLAUDE.md, .gitignore
+# So Tom's hosting only ever serves the customer-facing site.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync to GoDaddy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_REMOTE }}
+          local-dir: ./
+          # protocol: ftp     # default. Use "ftps" if Tom's plan supports it (Deluxe+ usually does)
+          # port: 21          # 21 plain FTP, 990 implicit FTPS, 22 SFTP (rare on basic plans)
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github
+            **/.github/**
+            **/node_modules/**
+            **/_archive_atlas/**
+            **/lonely/**
+            **/.DS_Store
+            **/CLAUDE.md
+            **/README.md
+            **/.gitignore
+            **/.claude
+            **/.claude/**
