@@ -174,16 +174,20 @@ h1, h2, h3, h4 {
 }
 .hero-eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   font-size: 13px;
   font-weight: 700;
-  /* White at 0.92 opacity — works over all hero photos. Bright teal (#7CF0E2)
-     retired 2026-05-13 (Founder direction: didn't harmonize with photo browns/warms).
-     Strong shadow is the redundancy for variable sky/background luminance. */
-  color: #ffffff;
-  opacity: 0.92;
+  /* Solid white + layered shadow for AA contrast over ANY photo background.
+     2026-05-13 v2: opacity:0.92 was weakening the text-shadow itself (opacity
+     property fades child shadows). Switched to rgba color so the triple-stack
+     shadow stays full strength. Creates a visible halo on bright skies AND
+     solid darkening on dark areas. */
+  color: rgba(255, 255, 255, 0.96);
   margin-bottom: 20px;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.55), 0 0 1px rgba(0,0,0,0.4);
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.55),
+    0 0 8px rgba(0,0,0,0.65),
+    0 2px 16px rgba(0,0,0,0.55);
 }
 .hero h1 {
   font-size: 64px;
@@ -254,13 +258,9 @@ h1, h2, h3, h4 {
   );
 }
 /* Redundant contrast: text-shadow under eyebrow / h1 / sub for sky variance. */
-.hero.hero--full .hero-eyebrow {
-  /* Drop the bright teal accent — it fought the photo. White + strong
-     shadow + the existing letter-spacing/uppercase carry the hierarchy. */
-  color: #ffffff;
-  opacity: 0.92;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.65), 0 0 1px rgba(0,0,0,0.5);
-}
+/* .hero.hero--full .hero-eyebrow override removed 2026-05-13 v2 — the base
+   .hero-eyebrow rule now uses rgba color + triple-stack shadow which works
+   well over all hero photos including the full-height home hero. */
 .hero.hero--full h1,
 .hero.hero--full .hero-sub {
   text-shadow: 0 2px 10px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.35);
