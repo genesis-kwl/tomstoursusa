@@ -2,7 +2,7 @@
 
 > **Read this first when resuming the project.** This file is the single source of truth for context, intent, current state, and conventions. Update at the end of every session if anything changed.
 
-**Last updated:** 2026-05-09 (S62)
+**Last updated:** 2026-05-13 (S62)
 **Repo:** https://github.com/genesis-kwl/tomstoursusa
 **Live site:** https://genesis-kwl.github.io/tomstoursusa/
 **Local path:** `~/tomstoursusa/`
@@ -28,7 +28,7 @@ The site is Tom's customer-facing landing page that helps Korean riders book his
 
 The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the promise made visual. Hero must always be a destination + tribe shot, not a generic landscape.
 
-**Conversion goal:** trigger contact via KAKAOTALK consultation. CTA = `tel:516-462-5817` (Tom's KakaoTalk-linked number — not 212-518-8772 which is the Manhattan landline fallback).
+**Conversion goal:** trigger contact via KAKAOTALK consultation. CTA = `kakaotalk://friendsearch?id=newyorkthomaslee` (deep-link opens KakaoTalk friend search on mobile). Because KakaoTalk has no clean 1-tap web DM link, contact.html surfaces a 3-step guidance (search ID → add as friend → DM or in-app call) above the CTA. International phone fallback `+1 212 518 8772` + email `tomstoursusa@gmail.com` for non-KakaoTalk users.
 
 **Tone:** Tom-personal. Tom often supplies copy in his own voice (e.g., "제가 뉴욕에서 할리 모터사이클 활동을 왕성하게 했다는 사진들입니다..."). Preserve Tom's voice verbatim where possible. Don't over-edit.
 
@@ -38,7 +38,7 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
 
 ## Outcome (current state, S62 close)
 
-8-page LP-style site, fully shipped + deployed. Latest deploy: commit `75afe3f`, pushed 2026-05-06.
+8-page LP-style site, fully shipped + deployed. Latest deploy: commit `38dfd8b` (contact consolidation), 2026-05-13.
 
 **Pages**
 - `index.html` — home: hero (full-height) → prologue → stats → 4 routes → "미국이 바이커들의 천국" → 스릴 코스 → 토마스의 할리 라이프 갤러리 (79 photos) → teal CTA → footer
@@ -51,7 +51,8 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
 - Hero photo: Forrest Gump Point KakaoTalk photo (Tom-supplied 2026-05-06).
 - Hero hi: "라이딩 잡지에서만 보던 길을, 베테랑 가이드와 직접" (Tom-edited 2026-05-06).
 - Hero sub: "미국 대륙을 수차례 달려본 토마스와 함께. 미국 46년 거주 · 50개 주 주행 · 116명의 한국 라이더 가이드."
-- KAKAOTALK CTA active across home/about/contact: `tel:516-462-5817`.
+- KAKAOTALK CTA active across home/about/stories/contact: `kakaotalk://friendsearch?id=newyorkthomaslee`. Single ID — `Tomstoursusa` deep-link + `516-462-5817` were retired 2026-05-13 (Founder direction). International phone fallback: `tel:+12125188772`.
+- Contact page (`contact.html`) reorganized 2026-05-13 into 3 sections: (1) KakaoTalk 3-step guidance + CTA · (2) fallback (international phone + email) · (3) timezone + address.
 - Nav label: "투어 현장 사진첩" (was "이야기" — Founder-renamed 2026-05-06).
 - Hero is `100dvh` on home (mobile + desktop verified).
 
@@ -70,9 +71,11 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
 - Inline `<script>` per page (lightbox + carousel only).
 - **External:** Google Fonts (Inter · Public Sans · Pretendard Variable). Nothing else.
 - **Hosting:**
-  - **Primary (production · 2026-05-09→):** Tom's GoDaddy hosting at `tomstoursusa.com` (custom domain). Static files uploaded via FTP/SFTP. Auto-deploy via `.github/workflows/deploy-godaddy.yml` on every push to main (requires GitHub Secrets `FTP_HOST` · `FTP_USER` · `FTP_PASSWORD` · `FTP_REMOTE`). Manual one-shot push: `./deploy-manual.sh` (needs `brew install lftp` once).
-  - **Mirror (preview · always-on):** GitHub Pages at `https://genesis-kwl.github.io/tomstoursusa/` — auto-deploys on push to main, no extra config. Useful as fallback / preview while DNS propagates / Tom GoDaddy hosting is troubled.
-  - Both are kept in sync because both deploy from the same `main` branch.
+  - **Primary (production · 2026-05-10→):** **GitHub Pages serving the custom domain `tomstoursusa.com`** directly. DNS A records at GoDaddy (the registrar) point at GitHub Pages anycast IPs `185.199.108.153 · .109.153 · .110.153 · .111.153`. HTTPS via Let's Encrypt — auto-issued + auto-renewed. The `CNAME` file at repo root declares the custom domain. `https_enforced=true` on Pages config.
+  - **Why not GoDaddy Managed WordPress hosting** (the original plan): GoDaddy's nginx + Apache + WordPress + Cloudflare pipeline fought any attempt to serve a static HTML site at root — locked `index.php`, restricted `.htaccess` overrides, layered cache. After a working FTP deploy and CDN diagnosis, DNS was switched to GitHub Pages (2026-05-10). Tom's GoDaddy hosting is still paid through renewal but unused; the static files we uploaded to `/html/` there are dormant and can be left or cleaned at next renewal.
+  - **Deploy mechanism:** `git push origin main` → GitHub Pages auto-builds within ~30s → live at `https://tomstoursusa.com/`. No GitHub Actions required.
+  - **Legacy GoDaddy deploy artifacts** (`deploy-manual.sh` · `deploy-godaddy.workflow.yml` at repo root): kept for reference / disaster recovery. NOT in active use. If we ever switch back to GoDaddy hosting, those + Tom's SFTP credentials would be needed again.
+  - **Mirror (always-on):** `https://genesis-kwl.github.io/tomstoursusa/` — same content, GitHub Pages default URL. Useful for cache-busted verification.
 - **Server (local dev):** `python3 -m http.server 4501` from `~/tomstoursusa/`. Don't introduce Vite / Live Server / Node — out of scope.
 
 ### Asset organization
@@ -104,7 +107,7 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
 
 3. **Hero full-height uses `.hero.hero--full`** (double-class specificity). The mobile `@media (max-width: 768px)` block at style.css:719 overrides single-class `.hero--full`, so the modifier MUST stay `.hero.hero--full`. Verified bug from 2026-05-06.
 
-4. **KAKAOTALK CTA = `<a href="kakaotalk://friendsearch?id=Tomstoursusa">`** with the ID visible in the label (so desktop users / failed deep links can copy and search manually). Four pages: index.html · about.html · stories.html · contact.html (all teal-cta + contact bottom CTA). Secondary line on each surfaces the second ID (`newyorkthomaslee` ↔ 212). Keep all in sync (P29-style logistics). Tom owns TWO KakaoTalk accounts each tied to a different phone number — never collapse to one.
+4. **KAKAOTALK CTA = `<a href="kakaotalk://friendsearch?id=newyorkthomaslee">`** — single ID across the whole site (2026-05-13 consolidation). The label keeps `newyorkthomaslee` visible so desktop users / failed deep links can copy and search manually. Four pages: index.html · about.html · stories.html · contact.html (all teal-cta + contact's prominent guidance CTA). teal-cta-meta lines on home/about/stories surface phone (`tel:+12125188772`) + email as fallback. Keep all in sync (P29-style logistics). The earlier dual-ID convention (`Tomstoursusa` + `newyorkthomaslee`) and Westchester phone `516-462-5817` were retired per Founder direction 2026-05-13.
 
 5. **Korean-first copy.** All user-facing strings are Korean. English only in branded eyebrows (DISCOVER · MEET YOUR GUIDE · etc.) and the wordmark "TOM'S TOURS USA".
 
@@ -126,7 +129,7 @@ The hero photo (Forrest Gump Point + 5 Korean riders + Monument Valley) IS the p
 - **`lonely/` exists locally as old version, ignored from git.** Don't reference. Don't push.
 - **Stories.html uses a different lightbox pattern** than home. Home: `__photos` JS array auto-built + `openLightbox(N)`. Stories: simple click handler on `.masonry-item img` setting lightbox `src`. Don't unify casually.
 - **About.html has its own carousel** (`#harleyLifeTrack`, `slideHarleyLife()`, `openLightboxLife()`) — independent of home's `#slideTrack`. Three separate JS namespaces. Naming is intentional.
-- **Tom owns TWO KakaoTalk IDs** (S62 close · 2026-05-08): `Tomstoursusa` (Westchester · 516-462-5817 · primary) and `newyorkthomaslee` (Manhattan · 212-518-8772 · secondary). The earlier "Tomstourusa" typo in contact.html was a leftover error — corrected to `Tomstoursusa`. Both IDs are intentional registrations Tom uses; both are now deep-linked via `kakaotalk://friendsearch?id=...` across all CTAs.
+- **Site uses a SINGLE KakaoTalk ID — `newyorkthomaslee`** (2026-05-13). Tom personally owns a second ID (`Tomstoursusa`) tied to Westchester `516-462-5817` but it is NOT surfaced on the site by Founder's direction. If a future session is tempted to re-add the second ID for "completeness," don't — Founder explicitly consolidated to one channel + one international phone (`+1 212-518-8772`) + email. The internal People-around-Tom table below preserves the second ID for disambiguation only.
 
 ### Workflow (per session)
 
@@ -200,7 +203,7 @@ These are people Founder has logged as connected to Tom. **Not for public exposu
 
 | Person | Relationship to Tom | Contact | Notes |
 |---|---|---|---|
-| **Tom Lee (이 토마스)** | Owner / guide | **KakaoTalk:** `Tomstoursusa` ↔ 516-462-5817 (Westchester / 웨체스터) · `newyorkthomaslee` ↔ 212-518-8772 (Manhattan / 맨하탄) · email tomstoursusa@gmail.com | The site's protagonist. All public CTAs route to KakaoTalk via `kakaotalk://friendsearch?id=...` deep links — no longer `tel:`. Primary CTA = `Tomstoursusa`. 70대, NY 거주 46년. |
+| **Tom Lee (이 토마스)** | Owner / guide | **Public site channels (only):** KakaoTalk `newyorkthomaslee` · international phone `+1 212-518-8772` · email `tomstoursusa@gmail.com`. **Personally also owns** (not on site): KakaoTalk `Tomstoursusa` ↔ Westchester `516-462-5817`. | The site's protagonist. 70대, NY 거주 46년. All public CTAs route to KakaoTalk `newyorkthomaslee` via `kakaotalk://friendsearch?id=...` deep link. Westchester phone + second KakaoTalk ID retired from site 2026-05-13 per Founder direction. |
 | **Anne Lee** | Tom's daughter | `516-603-8778` | US-based. Likely bilingual. Founder logged 2026-05-07. Not on public site. |
 | **Brian / 강석구** | UNRELATED to Tom's Tours — separate person/business | `347-844-0762` · The Clubhouse restaurant `theclubhouseny.com` (516-873-1110, 377 Denton Ave, New Hyde Park) | Founder explicitly clarified 2026-05-07: "completely apart from tomstoursusa.com." Logged here only because the info passed through this project's chat — DO NOT confuse with Tom's contacts. |
 
