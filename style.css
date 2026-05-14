@@ -250,11 +250,17 @@ h1, h2, h3, h4 {
    Color #0a1a35 ≈ rgb(10,26,53) keeps hue alignment with the photo's
    sky while still meeting AA contrast for white text on top. */
 .hero.hero--full::after {
+  /* 2026-05-13 v2: pulled back the scrim. v1 used midnight blue at 62% opacity
+     at top — designed for the sunset photo's dramatic warm clouds. With the
+     current daytime photo's bright cyan sky, that scrim was crushing the sky
+     into a depressing gloom. Now: neutral black, light top fade (text-shadow
+     does the heavy contrast work), 0% through the riders + horizon, slight
+     vignette at the bottom only. */
   background: linear-gradient(180deg,
-    rgba(10,26,53,0.62) 0%,
-    rgba(10,26,53,0.36) 28%,
-    rgba(10,26,53,0)    62%,
-    rgba(10,26,53,0.42) 100%
+    rgba(0, 0, 0, 0.22) 0%,
+    rgba(0, 0, 0, 0.10) 25%,
+    rgba(0, 0, 0, 0)    55%,
+    rgba(0, 0, 0, 0.32) 100%
   );
 }
 /* Redundant contrast: text-shadow under eyebrow / h1 / sub for sky variance. */
