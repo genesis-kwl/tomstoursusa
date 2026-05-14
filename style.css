@@ -249,16 +249,21 @@ h1, h2, h3, h4 {
    darkening reads as atmospheric sky shadow, not a foreign overlay.
    Color #0a1a35 ≈ rgb(10,26,53) keeps hue alignment with the photo's
    sky while still meeting AA contrast for white text on top. */
+/* 2026-05-13 v3: brighten the photo with a CSS filter for a sunnier feel.
+   Targeted only at the home full hero. brightness 1.08 + saturate 1.15 +
+   contrast 1.04 lifts the sky, vibrancy on blues + flag reds, slight punch.
+   Conservative values — looks like a good camera exposure, not HDR. */
+.hero.hero--full img {
+  filter: brightness(1.08) saturate(1.15) contrast(1.04);
+}
 .hero.hero--full::after {
-  /* 2026-05-13 v2: pulled back the scrim. v1 used midnight blue at 62% opacity
-     at top — designed for the sunset photo's dramatic warm clouds. With the
-     current daytime photo's bright cyan sky, that scrim was crushing the sky
-     into a depressing gloom. Now: neutral black, light top fade (text-shadow
-     does the heavy contrast work), 0% through the riders + horizon, slight
-     vignette at the bottom only. */
+  /* Scrim adjusted to compensate for the brightened photo. Slightly heavier
+     top so text contrast stays solid even though sky is now brighter. Still
+     neutral black (no color cast). 0% through middle keeps riders + horizon
+     fully visible. */
   background: linear-gradient(180deg,
-    rgba(0, 0, 0, 0.22) 0%,
-    rgba(0, 0, 0, 0.10) 25%,
+    rgba(0, 0, 0, 0.30) 0%,
+    rgba(0, 0, 0, 0.14) 25%,
     rgba(0, 0, 0, 0)    55%,
     rgba(0, 0, 0, 0.32) 100%
   );
