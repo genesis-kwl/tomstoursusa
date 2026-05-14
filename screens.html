@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사이트 둘러보기 · TOM'S TOURS USA</title>
+  <meta name="description" content="Tom's Tours USA 사이트를 한 페이지씩 둘러봅니다. 한국 라이더가 미국 모터사이클 투어 결정을 내리는 8 페이지 정적 사이트의 product tour.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@500;700&family=Inter:wght@400;500;600;700&family=Pretendard+Variable:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* /screens — editorial product tour, magazine register */
+    .screens-hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px 48px;
+      text-align: left;
+    }
+    .screens-eyebrow {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-weight: 700;
+      color: var(--accent, #B85C2E);
+      margin-bottom: 16px;
+    }
+    .screens-h1 {
+      font-size: 44px;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      color: var(--ink, #1c1c1c);
+      margin-bottom: 24px;
+    }
+    @media (max-width: 720px) { .screens-h1 { font-size: 32px; } }
+    .screens-lede {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--ink-soft, #4a4a4a);
+      max-width: 640px;
+    }
+
+    .screen-row {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 64px 24px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 32px 48px;
+      border-top: 1px solid var(--rule, #e8e8ed);
+    }
+    @media (max-width: 720px) {
+      .screen-row {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+        gap: 16px;
+      }
+    }
+    .screen-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent, #B85C2E);
+      letter-spacing: 0.02em;
+      padding-top: 6px;
+    }
+    .screen-body { display: flex; flex-direction: column; gap: 16px; }
+    .screen-eyebrow {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 700;
+      color: var(--ink-soft, #4a4a4a);
+    }
+    .screen-h2 {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink, #1c1c1c);
+      margin: 0;
+    }
+    @media (max-width: 720px) { .screen-h2 { font-size: 24px; } }
+    .screen-text {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink, #1c1c1c);
+      max-width: 720px;
+    }
+    .screen-why {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink-soft, #4a4a4a);
+      max-width: 720px;
+      padding-left: 16px;
+      border-left: 2px solid var(--accent, #B85C2E);
+    }
+    .screen-frame {
+      margin-top: 12px;
+      border: 1px solid var(--rule, #e8e8ed);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      max-width: 720px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.05);
+    }
+    .screen-frame img {
+      display: block;
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+    .screen-frame-meta {
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--ink-soft, #4a4a4a);
+      border-top: 1px solid var(--rule, #e8e8ed);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .screen-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink, #1c1c1c);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .screen-link:hover { text-decoration-thickness: 2px; }
+
+    .screens-end {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+      border-top: 1px solid var(--rule, #e8e8ed);
+    }
+    .screens-end-text {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--ink, #1c1c1c);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">TOM'S TOURS USA</a>
+    <button class="nav-toggle" aria-label="메뉴" onclick="document.getElementById('nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#routes">ROUTES</a></li>
+      <li><a href="about.html">토마스</a></li>
+      <li><a href="stories.html">투어 현장 사진첩</a></li>
+      <li><a href="contact.html">문의</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<section class="screens-hero">
+  <div class="screens-eyebrow">V1.0 · 사이트 둘러보기</div>
+  <h1 class="screens-h1">한국 라이더가 보는 화면, 한 페이지씩.</h1>
+  <p class="screens-lede">Tom's Tours USA 는 한국 라이더가 미국 모터사이클 투어 결정을 내리는 데 필요한 모든 것을 8 페이지에 담은 정적 사이트입니다. 어떤 화면이 어떤 일을 하는지, 왜 그 자리에 있는지 — 한 페이지씩 보여드립니다.</p>
+</section>
+
+<!-- 01 HOME HERO -->
+<section class="screen-row">
+  <div class="screen-num">01</div>
+  <div class="screen-body">
+    <div class="screen-eyebrow">홈 · 첫 화면</div>
+    <h2 class="screen-h2">잡지에서 보던 길의 첫 인사.</h2>
+    <p class="screen-text">홈 페이지는 풀 화면 사진 — 모뉴먼트 밸리를 향해 달리는 한국 라이더 5인 (Korea Chapter 패치, 태극기·성조기). 헤드라인 "라이딩 잡지에서만 보던 길을, 베테랑 가이드와 직접" 과 함께 사이트의 약속을 단 한 장면으로 보여줍니다.</p>
+    <p class="screen-why">왜 이 사진인가 — Tom 의 audience (60-70대 한국 라이더) 가 결정 임계에서 묻는 첫 질문은 *"이건 정말 한국 사람도 하는 건가? 안전한가?"* 입니다. 익명의 라이더가 아니라 *KOREA CHAPTER 패치가 읽히는* 동포 5인이 *함께* 달리는 장면이 그 질문에 답합니다.</p>
+    <div class="screen-frame">
+      <img src="images/tom_photo_34_kakao_2026-05-13.jpg" alt="모뉴먼트 밸리를 향해 달리는 한국 라이더 단체 — Korea Chapter 패치 + 태극기·성조기">
+      <div class="screen-frame-meta">
+        <span>holm/ · 100dvh full-bleed</span>
+        <a href="index.html" class="screen-link">현재 화면 보기 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 PROLOGUE -->
+<section class="screen-row">
+  <div class="screen-num">02</div>
+  <div class="screen-body">
+    <div class="screen-eyebrow">홈 · 프롤로그</div>
+    <h2 class="screen-h2">"두두둥 두둥…" — Tom 의 목소리로.</h2>
+    <p class="screen-text">스크롤 한 번 후, 사진이 끝나면 Tom 의 voice 가 본문으로 들어옵니다. *"모터사이클에서 심장 뛰는 소리가 나는 걸 아시나요?"* 부터 *"한국 라이더가 미국에서 길을 잃지 않고, 영어 한 마디 없이도 가장 좋은 길을 달리도록"* 까지 — 시인적 도입.</p>
+    <p class="screen-why">왜 이 자리에 — hero 가 *promise* 라면 prologue 는 *trust*. Tom 의 voice 가 묻어나는 4 문단이 *"이 사람이 진짜 라이더구나, 마케팅이 아니구나"* 신뢰를 만듭니다.</p>
+    <div class="screen-frame-meta" style="border:1px solid var(--rule); border-radius: 12px; padding: 18px 22px;">
+      <span>홈 페이지 두 번째 섹션 · 4 문단 narrative</span>
+      <a href="index.html#prologue" class="screen-link">현재 화면 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ROUTES -->
+<section class="screen-row">
+  <div class="screen-num">03</div>
+  <div class="screen-body">
+    <div class="screen-eyebrow">홈 · 4 루트</div>
+    <h2 class="screen-h2">선택지를 4 개로 좁히기.</h2>
+    <p class="screen-text">동부 (뉴욕 → DC → 나이아가라 · 3,700km · 12일) · 서부 (라스베가스 → 그랜드캐니언 · 4,000km · 12일) · 대륙 횡단 (편도 · 4,500km) · Route 66 (시카고 → 산타모니카 · 3,945km). 각 카드 클릭 시 별도 페이지 (`routes/east.html` 등) 로 상세.</p>
+    <p class="screen-why">왜 4 개인가 — 결정 마비를 막는 인지 부하 임계. 5+ 면 사용자가 *"나중에 다시 보자"* 가 됩니다. 4 는 한국 라이더들 사이의 가장 인기 있는 코스 4 개로, *Tom 이 실제로 가이드한* 검증된 옵션.</p>
+    <div class="screen-frame-meta" style="border:1px solid var(--rule); border-radius: 12px; padding: 18px 22px;">
+      <span>홈 #routes 섹션 · 4 cards grid</span>
+      <a href="index.html#routes" class="screen-link">현재 화면 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PARADISE + THRILL -->
+<section class="screen-row">
+  <div class="screen-num">04</div>
+  <div class="screen-body">
+    <div class="screen-eyebrow">홈 · 미국 라이딩 천국 + 스릴 코스</div>
+    <h2 class="screen-h2">왜 미국인가, 어디서 스릴이 있는가.</h2>
+    <p class="screen-text">"미국이 바이커들의 천국인 점" — Tom 이 46년 라이딩 경험에서 정리한 7 가지 (고속도로 · 일직선 · 운전 문화 · etc.). 그 아래 "미국 최고의 스릴 라이딩 코스 TOP 7" — 용의 꼬리 · 태평양 해안 · 곰 이빨 하이웨이 등 베테랑용 도전 코스.</p>
+    <p class="screen-why">왜 이 두 섹션 — *"왜 미국에 가야 하지?"* 라는 근원 질문에 *Tom 의 직접 정리* 로 답하고, 그 답을 강화하는 *bucket-list 매혹* 을 곁들임. 4 routes 가 *결정 옵션* 이라면 이 둘은 *결정 동기*.</p>
+    <div class="screen-frame-meta" style="border:1px solid var(--rule); border-radius: 12px; padding: 18px 22px;">
+      <span>홈 #paradise + #thrill · 7 + 7 lists</span>
+      <a href="index.html#paradise" class="screen-link">현재 화면 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 05 HARLEY LIFE GALLERY -->
+<section class="screen-row">
+  <div class="screen-num">05</div>
+  <div class="screen-body">
+    <div class="screen-eyebrow">홈 · 토마스의 할리 라이프</div>
+    <h2 class="screen-h2">79 장으로 보여주는 "이건 진짜다".</h2>
+    <p class="screen-text">홈 페이지 하단의 horizontal carousel — 49 투어 사진 + 30 Tom 의 할리 라이프 (맨하탄 한인 퍼레이드, Route 66 라이딩, 스터지스 랠리 준비 등). 클릭 → lightbox + prev/next 네비 + 카운터. 모바일 swipe.</p>
+    <p class="screen-why">왜 79 장 — 한 장은 광고일 수 있어도 79 장은 *살아낸 시간* 입니다. Tom 의 *오랜 라이딩 인생* 의 증거.</p>
+    <div class="screen-frame-meta" style="border:1px solid var(--rule); border-radius: 12px; padding: 18px 22px;">
+      <span>홈 #stories 섹션 · 79-photo carousel + lightbox</span>
+      <a href="index.html#stories" class="screen-link">현재 화면 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ABOUT -->
+<section class="screen-row">
+  <div class="screen-num">06</div>
+  <div class="screen-body">
+    <div class="screen-eyebrow">about.html · 토마스 이</div>
+    <h2 class="screen-h2">한 사람의 미국, 46년.</h2>
+    <p class="screen-text">Portrait hero (Tom + 부인 + 할리, 태극기 패치). 본문 — 청년 시절 가와사키부터 8년간 한인 할리 클럽 회장까지, 어떻게 한국 라이더 가이드를 시작하게 됐는지 narrative 3 문단. 그 아래 stats (46+ 거주 · 50 주 · 8년 회장 · 116 가이드) + 30 장 할리 라이프 carousel.</p>
+    <p class="screen-why">왜 별도 페이지 — *Tom 자신* 이 product 의 일부입니다. 홈에서 *promise* 를 본 사용자가 *"이 사람이 누구지?"* 묻는 순간 곧장 답하는 페이지.</p>
+    <div class="screen-frame-meta" style="border:1px solid var(--rule); border-radius: 12px; padding: 18px 22px;">
+      <span>about.html · portrait hero + narrative + carousel</span>
+      <a href="about.html" class="screen-link">현재 화면 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 07 STORIES -->
+<section class="screen-row">
+  <div class="screen-num">07</div>
+  <div class="screen-body">
+    <div class="screen-eyebrow">stories.html · 투어 현장 사진첩</div>
+    <h2 class="screen-h2">71 장 masonry, 한 장씩 크게.</h2>
+    <p class="screen-text">홈의 horizontal carousel 과 별개로 전체 사진을 한꺼번에 보는 페이지. Masonry 그리드 (4-col 데스크톱 / 2-col 모바일), 클릭 → 풀스크린 lightbox, 화살표/swipe/키보드 모두 작동. 41 투어 + 30 할리 라이프 = 71 장.</p>
+    <p class="screen-why">왜 별도 페이지 — 홈의 carousel 은 *지나가며 보는 것*, stories.html 은 *마음 먹고 한 시간 보는 것*. 결정 임계 직전에 *"증거 한 번 더 확인하고 싶다"* 는 사용자를 위한 deep dive.</p>
+    <div class="screen-frame-meta" style="border:1px solid var(--rule); border-radius: 12px; padding: 18px 22px;">
+      <span>stories.html · 71-photo masonry + lightbox</span>
+      <a href="stories.html" class="screen-link">현재 화면 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 08 CONTACT -->
+<section class="screen-row">
+  <div class="screen-num">08</div>
+  <div class="screen-body">
+    <div class="screen-eyebrow">contact.html · 카카오톡 안내</div>
+    <h2 class="screen-h2">결정의 자리 — 한 카드 안에 모든 것.</h2>
+    <p class="screen-text">단일 magazine-card 섹션. 센터피스는 큰 글씨로 표시된 카카오톡 아이디 *newyorkthomaslee*. 그 아래 3-step 안내 (카톡 앱 → 친구 추가 → 메시지). Fallback 으로 국제전화 (+1 212 518 8772) + 이메일. 시차 + 주소는 fine print.</p>
+    <p class="screen-why">왜 단일 섹션 — 결정의 자리에서는 *옵션 많은* 게 *옵션 적은* 것보다 나쁩니다. 한 카드 안에서 시선이 ID → 3 단계 → fallback → meta 순으로 자연히 흐릅니다. KakaoTalk deep-link CTA 버튼은 *제거* 됨 (mobile 에서 친구 검색 화면을 안정적으로 못 여는 약한 promise 였음).</p>
+    <div class="screen-frame-meta" style="border:1px solid var(--rule); border-radius: 12px; padding: 18px 22px;">
+      <span>contact.html · single magazine card</span>
+      <a href="contact.html" class="screen-link">현재 화면 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTES DETAIL -->
+<section class="screen-row">
+  <div class="screen-num">09</div>
+  <div class="screen-body">
+    <div class="screen-eyebrow">routes/*.html · 4 루트 상세</div>
+    <h2 class="screen-h2">각 루트, 한 페이지로.</h2>
+    <p class="screen-text">동부 / 서부 / 대륙 횡단 / Route 66 — 각 루트는 자체 페이지. Hero photo + 루트 정보 (날짜 · km · 일정) + "이 루트의 사진" 6-thumb 갤러리 (lightbox 작동). 4 페이지 모두 동일 구조, 다른 콘텐츠.</p>
+    <p class="screen-why">왜 4 별도 페이지 — 홈의 cards 는 *맛보기*, routes/* 는 *세부 검토*. SEO 측면도 — 각 루트가 자체 URL 이라 검색 노출 (*"미국 동부 모터사이클 투어"* 같은 한국어 검색).</p>
+    <div class="screen-frame-meta" style="border:1px solid var(--rule); border-radius: 12px; padding: 18px 22px;">
+      <span>routes/east · west · transcontinental · route66 · 각 동일 구조</span>
+      <a href="routes/east.html" class="screen-link">현재 화면 보기 (동부) →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ENDING -->
+<section class="screens-end">
+  <p class="screens-end-text">8 페이지 + 4 routes 합쳐 12 화면. 모두 정적 HTML. 빌드 도구 없음. 외부 의존 Google Fonts 만. GitHub Pages 무료 호스팅에 자동 배포, 도메인 `tomstoursusa.com` 라이브.</p>
+  <p class="screens-end-text" style="margin-top: 24px;">사진 자산은 Tom 이 직접 제공한 79+ 장. 카피는 Tom 의 voice 보존 (특히 "토마스의 할리 라이프" 섹션 — Tom 본인 글). Korean-first, 영어는 branded eyebrow 만.</p>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <strong>TOM'S TOURS USA</strong>
+        한국 라이더를 위한 미국 모터사이클 투어 가이드.<br>미국 46년 거주 · 50개 주 · 116명 가이드.
+      </div>
+      <div>
+        <h4>루트</h4>
+        <ul>
+          <li><a href="routes/east.html">동부 투어</a></li>
+          <li><a href="routes/west.html">서부 투어</a></li>
+          <li><a href="routes/transcontinental.html">대륙 횡단</a></li>
+          <li><a href="routes/route66.html">Route 66</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>토마스</h4>
+        <ul>
+          <li><a href="about.html">토마스 소개</a></li>
+          <li><a href="stories.html">투어 현장 사진첩</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>문의</h4>
+        <ul>
+          <li>카톡 newyorkthomaslee</li>
+          <li>전화 +1 212-518-8772</li>
+          <li>tomstoursusa@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Toms World Inc. · 111 Lockwood Ave. Suite 202, New Rochelle, NY · © 2026</span>
+      <span>참고: 한국과 시간차이는 평균 13시간입니다</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
